@@ -1,0 +1,140 @@
+{
+  "nav": {
+    "home": "Ana Səhifə",
+    "about": "Haqqımızda",
+    "services": "Xidmətlər",
+    "projects": "Layihələr",
+    "workflow": "İş Prosesi",
+    "contact": "Əlaqə"
+  },
+  "common": {
+    "back": "Geri",
+    "notFound": "Tapılmadı"
+  },
+  "hero": {
+    "title": "Gələcəyi İnşa Edirik",
+    "subtitle": "Peşəkar tikinti və interyer dizayn xidmətləri ilə xəyallarınızı reallığa çeviririk",
+    "cta": "Haqqımızda",
+    "ctaSecondary": "Layihələrimiz"
+  },
+  "about": {
+    "sectionTitle": "Haqqımızda",
+    "sectionSubtitle": "Keyfiyyət və etibarın ünvanı",
+    "title": "TR Construction - Tikinti Sənətinin Ustadları",
+    "description": "Biz 10 ildən artıqdır ki, tikinti və interyer dizayn sahəsində fəaliyyət göstəririk. Peşəkar komandamız ilə müştərilərimizə ən yüksək keyfiyyətli xidmət təqdim edirik.",
+    "mission": {
+      "title": "Missiyamız",
+      "text": "Müasir texnologiyalar və innovativ həllərlə müştərilərimizin təsəvvürlərini gerçəkliyə çevirmək."
+    },
+    "vision": {
+      "title": "Vizyonumuz",
+      "text": "Tikinti sektorunda lider olmaq və hər layihəmizdə mükəmməlliyə nail olmaq."
+    }
+  },
+  "services": {
+    "sectionTitle": "Xidmətlərimiz",
+    "sectionSubtitle": "Ehtiyaclarınıza uyğun həllər",
+    "items": {
+      "interior": {
+        "title": "İnteryer Dizayn",
+        "description": "Müasir və funksional interyer həlləri ilə yaşayış məkanlarınızı dəyişdiririk."
+      },
+      "exterior": {
+        "title": "Eksteryer Dizayn",
+        "description": "Binaların xarici görünüşünü estetik və dayanıqlı şəkildə yeniləyirik."
+      },
+      "construction": {
+        "title": "Tikinti İşləri",
+        "description": "Yeni tikili layihələri üçün əsaslı tikinti xidmətləri təqdim edirik."
+      },
+      "renovation": {
+        "title": "Təmir və Yeniləmə",
+        "description": "Mövcud məkanların müasir standartlara uyğun təmiri və yenilənməsi."
+      }
+    }
+  },
+  "stats": {
+    "projects": "Uğurlu Layihə",
+    "experience": "İllik Təcrübə",
+    "clients": "Razı Müştəri",
+    "team": "Peşəkar Komanda"
+  },
+  "projects": {
+    "sectionTitle": "Layihələrimiz",
+    "sectionSubtitle": "Tamamlanmış işlərimizdən nümunələr",
+    "viewAll": "Hamısına Bax",
+    "viewProject": "Layihəyə Bax"
+  },
+  "workflow": {
+    "sectionTitle": "İş Prosesimiz",
+    "sectionSubtitle": "Layihənizin həyata keçirilmə mərhələləri",
+    "steps": {
+      "planning": {
+        "title": "Planlama",
+        "description": "Ehtiyaclarınızı təhlil edib, optimal həll yolları hazırlayırıq."
+      },
+      "design": {
+        "title": "Dizayn",
+        "description": "3D modelləmə və vizuallaşdırma ilə layihənizi canlandırırıq."
+      },
+      "construction": {
+        "title": "Tikinti",
+        "description": "Peşəkar komandamız ilə layihənizi həyata keçiririk."
+      },
+      "delivery": {
+        "title": "Təhvil",
+        "description": "Keyfiyyət yoxlamasından sonra layihəni sizə təqdim edirik."
+      }
+    }
+  },
+  "partners": {
+    "sectionTitle": "Tərəfdaşlarımız",
+    "sectionSubtitle": "Güvənilir partnyor şirkətlərlə əməkdaşlıq"
+  },
+  "testimonials": {
+    "sectionTitle": "Müştəri Rəyləri",
+    "sectionSubtitle": "Müştərilərimiz haqqımızda nə düşünür"
+  },
+  "contact": {
+    "sectionTitle": "Əlaqə",
+    "sectionSubtitle": "Bizimlə əlaqə saxlayın",
+    "form": {
+      "name": "Ad Soyad",
+      "email": "E-poçt",
+      "phone": "Telefon",
+      "subject": "Mövzu",
+      "message": "Mesajınız",
+      "submit": "Göndər",
+      "sending": "Göndərilir...",
+      "success": "Mesajınız uğurla göndərildi!",
+      "error": "Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin."
+    },
+    "info": {
+      "address": "Ünvan",
+      "addressValue": "Bakı, Azərbaycan",
+      "phone": "Telefon",
+      "phoneValue": "+994 XX XXX XX XX",
+      "email": "E-poçt",
+      "emailValue": "info@trconstruction.az",
+      "workingHours": "İş Saatları",
+      "workingHoursValue": "Bazar ertəsi - Cümə: 09:00 - 18:00"
+    }
+  },
+  "footer": {
+    "description": "Peşəkar tikinti və interyer dizayn xidmətləri ilə xəyallarınızı reallığa çeviririk.",
+    "quickLinks": "Sürətli Keçidlər",
+    "services": "Xidmətlər",
+    "contactInfo": "Əlaqə Məlumatları",
+    "followUs": "Bizi İzləyin",
+    "copyright": "© 2024 TR Construction. Bütün hüquqlar qorunur."
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Burada hələ tikinti gedir...",
+    "description": "Axtardığınız səhifə tapılmadı. Bəlkə də hələ inşa mərhələsindədir!",
+    "backHome": "Ana Səhifəyə Qayıt"
+  },
+  "intro": {
+    "tagline": "Tikintidə Mükəmməllik"
+  }
+}

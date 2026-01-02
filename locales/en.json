@@ -1,0 +1,140 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "projects": "Projects",
+    "workflow": "Workflow",
+    "contact": "Contact"
+  },
+  "common": {
+    "back": "Back",
+    "notFound": "Not Found"
+  },
+  "hero": {
+    "title": "Building the Future",
+    "subtitle": "We turn your dreams into reality with professional construction and interior design services",
+    "cta": "About Us",
+    "ctaSecondary": "Our Projects"
+  },
+  "about": {
+    "sectionTitle": "About Us",
+    "sectionSubtitle": "The address of quality and trust",
+    "title": "TR Construction - Masters of Construction Art",
+    "description": "We have been operating in construction and interior design for over 10 years. With our professional team, we provide the highest quality service to our clients.",
+    "mission": {
+      "title": "Our Mission",
+      "text": "To turn our clients' visions into reality with modern technologies and innovative solutions."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "text": "To be a leader in the construction sector and achieve excellence in every project."
+    }
+  },
+  "services": {
+    "sectionTitle": "Our Services",
+    "sectionSubtitle": "Solutions tailored to your needs",
+    "items": {
+      "interior": {
+        "title": "Interior Design",
+        "description": "We transform your living spaces with modern and functional interior solutions."
+      },
+      "exterior": {
+        "title": "Exterior Design",
+        "description": "We renovate the exterior appearance of buildings aesthetically and durably."
+      },
+      "construction": {
+        "title": "Construction",
+        "description": "We provide fundamental construction services for new building projects."
+      },
+      "renovation": {
+        "title": "Renovation",
+        "description": "Renovation and updating of existing spaces to modern standards."
+      }
+    }
+  },
+  "stats": {
+    "projects": "Successful Projects",
+    "experience": "Years Experience",
+    "clients": "Happy Clients",
+    "team": "Professional Team"
+  },
+  "projects": {
+    "sectionTitle": "Our Projects",
+    "sectionSubtitle": "Examples from our completed work",
+    "viewAll": "View All",
+    "viewProject": "View Project"
+  },
+  "workflow": {
+    "sectionTitle": "Our Workflow",
+    "sectionSubtitle": "Stages of your project implementation",
+    "steps": {
+      "planning": {
+        "title": "Planning",
+        "description": "We analyze your needs and prepare optimal solutions."
+      },
+      "design": {
+        "title": "Design",
+        "description": "We bring your project to life with 3D modeling and visualization."
+      },
+      "construction": {
+        "title": "Construction",
+        "description": "We implement your project with our professional team."
+      },
+      "delivery": {
+        "title": "Delivery",
+        "description": "We present the project to you after quality inspection."
+      }
+    }
+  },
+  "partners": {
+    "sectionTitle": "Our Partners",
+    "sectionSubtitle": "Collaboration with trusted partner companies"
+  },
+  "testimonials": {
+    "sectionTitle": "Testimonials",
+    "sectionSubtitle": "What our clients think about us"
+  },
+  "contact": {
+    "sectionTitle": "Contact",
+    "sectionSubtitle": "Get in touch with us",
+    "form": {
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Your Message",
+      "submit": "Send",
+      "sending": "Sending...",
+      "success": "Your message has been sent successfully!",
+      "error": "An error occurred. Please try again."
+    },
+    "info": {
+      "address": "Address",
+      "addressValue": "Baku, Azerbaijan",
+      "phone": "Phone",
+      "phoneValue": "+994 XX XXX XX XX",
+      "email": "Email",
+      "emailValue": "info@trconstruction.az",
+      "workingHours": "Working Hours",
+      "workingHoursValue": "Monday - Friday: 09:00 - 18:00"
+    }
+  },
+  "footer": {
+    "description": "We turn your dreams into reality with professional construction and interior design services.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "contactInfo": "Contact Info",
+    "followUs": "Follow Us",
+    "copyright": "© 2024 TR Construction. All rights reserved."
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Construction in progress here...",
+    "description": "The page you're looking for was not found. Perhaps it's still under construction!",
+    "backHome": "Back to Home"
+  },
+  "intro": {
+    "tagline": "Excellence in Construction"
+  }
+}
