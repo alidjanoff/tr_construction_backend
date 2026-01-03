@@ -18,5 +18,5 @@ jobs:
             docker stop tr_construction_backend || true
             docker rm tr_construction_backend || true
             docker build -t tr-backend-image .
-            docker run -d --name tr_construction_backend -p 8000:8000 tr-backend-image
+            docker run -d --name tr_construction_backend -p 0.0.0.0:8000:8000 tr-backend-image
             docker image prune -f
