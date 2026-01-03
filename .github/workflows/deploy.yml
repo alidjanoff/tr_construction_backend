@@ -15,4 +15,4 @@ jobs:
           script: |
             cd /var/www/tr_construction_backend
             git pull origin main
-            docker-compose up -d --build tr-backend
+            docker compose up -d --build tr-backend
