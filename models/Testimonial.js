@@ -14,12 +14,6 @@ const testimonialSchema = new mongoose.Schema({
         type: Map,
         of: String,
         required: true
-    },
-    rating: {
-        type: Number,
-        required: true,
-        min: 0,
-        max: 5
     }
 }, {
     timestamps: true

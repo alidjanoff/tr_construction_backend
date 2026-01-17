@@ -56,7 +56,7 @@ const uploadSingleImage = multer({
 
 // Public routes
 router.get('/', languageFilter, getProjects);
-router.get('/:id', languageFilter, getProject);
+router.get('/:idOrSlug', languageFilter, getProject);
 
 // Protected routes
 router.post('/', auth, uploadCover, createProject);

@@ -5,6 +5,7 @@ const { getImageUrl } = require('../config/upload');
 const formatProjectList = (project) => ({
     id: project._id,
     title: Object.fromEntries(project.title),
+    slug: project.slug,
     badge: Object.fromEntries(project.badge),
     address: Object.fromEntries(project.address),
     map_url: project.map_url,
@@ -15,6 +16,7 @@ const formatProjectList = (project) => ({
 const formatProjectDetail = (project) => ({
     id: project._id,
     title: Object.fromEntries(project.title),
+    slug: project.slug,
     details: Object.fromEntries(project.details),
     badge: Object.fromEntries(project.badge),
     address: Object.fromEntries(project.address),
@@ -26,25 +28,59 @@ const formatProjectDetail = (project) => ({
     }))
 });
 
-// @desc    Get all projects
-// @route   GET /api/v1/projects
+// @desc    Get all projects with pagination
+// @route   GET /api/v1/projects?page=1&limit=10
 exports.getProjects = async (req, res) => {
     try {
-        const projects = await Project.find();
-        res.json(projects.map(formatProjectList));
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        const total = await Project.countDocuments();
+        const projects = await Project.find()
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(limit);
+
+        res.json({
+            data: projects.map(formatProjectList),
+            pagination: {
+                page,
+                limit,
+                total,
+                pages: Math.ceil(total / limit),
+                hasNext: page < Math.ceil(total / limit),
+                hasPrev: page > 1
+            }
+        });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-// @desc    Get single project
-// @route   GET /api/v1/projects/:id
+// @desc    Get single project by ID or Slug
+// @route   GET /api/v1/projects/:idOrSlug
 exports.getProject = async (req, res) => {
     try {
-        const project = await Project.findById(req.params.id);
-        if (!project) {
-            return res.status(404).json({ message: 'Project not found' });
+        const { idOrSlug } = req.params;
+
+        // Try to find by ID first, then by slug
+        let project = null;
+
+        // Check if it looks like a MongoDB ObjectId
+        if (idOrSlug.match(/^[0-9a-fA-F]{24}$/)) {
+            project = await Project.findById(idOrSlug);
         }
+
+        // If not found by ID, try slug
+        if (!project) {
+            project = await Project.findOne({ slug: idOrSlug });
+        }
+
+        if (!project) {
+            return res.status(404).json({ message: 'Layihə tapılmadı' });
+        }
+
         res.json(formatProjectDetail(project));
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -65,7 +101,7 @@ exports.createProject = async (req, res) => {
         const parsedBadge = typeof badge === 'string' ? JSON.parse(badge) : badge;
         const parsedAddress = typeof address === 'string' ? JSON.parse(address) : address;
 
-        await Project.create({
+        const project = new Project({
             title: new Map(Object.entries(parsedTitle)),
             details: new Map(Object.entries(parsedDetails || {})),
             badge: new Map(Object.entries(parsedBadge || {})),
@@ -75,9 +111,15 @@ exports.createProject = async (req, res) => {
             image_gallery: []
         });
 
-        const projects = await Project.find();
+        await project.save();
+
+        const projects = await Project.find().sort({ createdAt: -1 });
         res.status(201).json(projects.map(formatProjectList));
     } catch (error) {
+        // Handle duplicate title error
+        if (error.code === 'DUPLICATE_TITLE') {
+            return res.status(400).json({ message: error.message });
+        }
         res.status(500).json({ message: error.message });
     }
 };
@@ -98,7 +140,7 @@ exports.updateProject = async (req, res) => {
 
         const project = await Project.findById(id);
         if (!project) {
-            return res.status(404).json({ message: 'Project not found' });
+            return res.status(404).json({ message: 'Layihə tapılmadı' });
         }
 
         project.title = new Map(Object.entries(parsedTitle));
@@ -107,11 +149,16 @@ exports.updateProject = async (req, res) => {
         project.address = new Map(Object.entries(parsedAddress || {}));
         if (map_url !== undefined) project.map_url = map_url;
         if (cover_image) project.cover_image = cover_image;
+
         await project.save();
 
-        const projects = await Project.find();
+        const projects = await Project.find().sort({ createdAt: -1 });
         res.json(projects.map(formatProjectList));
     } catch (error) {
+        // Handle duplicate title error
+        if (error.code === 'DUPLICATE_TITLE') {
+            return res.status(400).json({ message: error.message });
+        }
         res.status(500).json({ message: error.message });
     }
 };
@@ -122,12 +169,12 @@ exports.deleteProject = async (req, res) => {
     try {
         const project = await Project.findById(req.params.id);
         if (!project) {
-            return res.status(404).json({ message: 'Project not found' });
+            return res.status(404).json({ message: 'Layihə tapılmadı' });
         }
 
         await Project.findByIdAndDelete(req.params.id);
 
-        const projects = await Project.find();
+        const projects = await Project.find().sort({ createdAt: -1 });
         res.json(projects.map(formatProjectList));
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -140,7 +187,7 @@ exports.addProjectImages = async (req, res) => {
     try {
         const project = await Project.findById(req.params.project_id);
         if (!project) {
-            return res.status(404).json({ message: 'Project not found' });
+            return res.status(404).json({ message: 'Layihə tapılmadı' });
         }
 
         if (req.files && req.files.length > 0) {
@@ -151,7 +198,7 @@ exports.addProjectImages = async (req, res) => {
             await project.save();
         }
 
-        const projects = await Project.find();
+        const projects = await Project.find().sort({ createdAt: -1 });
         res.json(projects.map(formatProjectDetail));
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -165,7 +212,7 @@ exports.updateProjectImage = async (req, res) => {
         const { id } = req.body;
         const project = await Project.findById(req.params.project_id);
         if (!project) {
-            return res.status(404).json({ message: 'Project not found' });
+            return res.status(404).json({ message: 'Layihə tapılmadı' });
         }
 
         const imageIndex = project.image_gallery.findIndex(
@@ -173,7 +220,7 @@ exports.updateProjectImage = async (req, res) => {
         );
 
         if (imageIndex === -1) {
-            return res.status(404).json({ message: 'Image not found in gallery' });
+            return res.status(404).json({ message: 'Şəkil qalereyada tapılmadı' });
         }
 
         if (req.file) {
@@ -181,7 +228,7 @@ exports.updateProjectImage = async (req, res) => {
             await project.save();
         }
 
-        const projects = await Project.find();
+        const projects = await Project.find().sort({ createdAt: -1 });
         res.json(projects.map(formatProjectDetail));
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -194,7 +241,7 @@ exports.deleteProjectImage = async (req, res) => {
     try {
         const project = await Project.findById(req.params.project_id);
         if (!project) {
-            return res.status(404).json({ message: 'Project not found' });
+            return res.status(404).json({ message: 'Layihə tapılmadı' });
         }
 
         project.image_gallery = project.image_gallery.filter(
@@ -202,7 +249,7 @@ exports.deleteProjectImage = async (req, res) => {
         );
         await project.save();
 
-        const projects = await Project.find();
+        const projects = await Project.find().sort({ createdAt: -1 });
         res.json(projects.map(formatProjectDetail));
     } catch (error) {
         res.status(500).json({ message: error.message });
