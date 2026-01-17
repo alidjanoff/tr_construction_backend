@@ -1,0 +1,2375 @@
+{\rtf1\ansi\ansicpg1254\cocoartf2821
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Arial-BoldMT;\f1\froman\fcharset0 TimesNewRomanPSMT;\f2\froman\fcharset0 Times-Roman;
+\f3\fswiss\fcharset0 ArialMT;\f4\fnil\fcharset134 STSongti-SC-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\b\fs42\fsmilli21333 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 TR Construction
+\f1\b0\fs32 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 Bu vebsayt \'fc\'e7\'fcn backend haz\uc0\u305 rlanmas\u305 n\u305  ist\u601 yir\u601 m. Mongo db Atlas + Node js + Express Localhost 8000 de calisacaq bir backend olacaq. Prod a \'e7\u305 xanda sad\u601 c\u601  env d\u601  olan V\u304 TE_BASE_URL d\u601 yi\u351 dir\u601 c\u601 m localhost:8000 yerind\u601  real url yazacam v\u601  avtomatik he\'e7 bir d\u601 yi\u351 iklik olmadan ora ba\u287 lanacaq. Sonradan bunu servere deploy edecem. M\u601 n\u601  laz\u305 m olan api siyah\u305 s\u305 n\u305  a\u351 a\u287 \u305 da yaz\u305 ram:
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/hero
+\f1 \
+
+\f3 Response:\uc0\u8232 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 title: string | null;
+\f1 \
+
+\f3 info: string | null;
+\f1 \
+
+\f3 image_url: string; (image_url)
+\f1 \
+
+\f3 button_text: string | null;
+\f1 \
+
+\f3 button_url: string | null;\uc0\u8232 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/hero
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 image: binary; (.png, .jpg, .jpeg, .webp, .avif) formdata binary gonderecem ve mene image_url gelecek\uc0\u8232 title?: string | null;
+\f1 \
+
+\f3 info?: string | null;
+\f1 \
+
+\f3 button_text?: string | null;
+\f1 \
+
+\f3 button_url?: string | null;\uc0\u8232 \}
+\f1 \
+
+\f3 Response:\uc0\u8232 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 title: string | null;
+\f1 \
+
+\f3 info: string | null;
+\f1 \
+
+\f3 image_url: string; (image_url)
+\f1 \
+
+\f3 button_text: string | null;
+\f1 \
+
+\f3 button_url: string | null;\uc0\u8232 \}[] yeni elave olunan obyekt ile birlikde datanin hamisi
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/hero/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 image: binary; (.png, .jpg, .jpeg, .webp, .avif) formdata binary gonderecem ve mene image_url gelecek\uc0\u8232 title?: string | null;
+\f1 \
+
+\f3 info?: string | null;
+\f1 \
+
+\f3 button_text?: string | null;
+\f1 \
+
+\f3 button_url?: string | null;\uc0\u8232 \}
+\f1 \
+
+\f3 Response:\uc0\u8232 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 title: string | null;
+\f1 \
+
+\f3 info: string | null;
+\f1 \
+
+\f3 image_url: string; (image_url)
+\f1 \
+
+\f3 button_text: string | null;
+\f1 \
+
+\f3 button_url: string | null;\uc0\u8232 \}[] deyisdirilmis obyekt ile birlikde datanin hamisi
+\f1 \
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/hero/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:\'a0
+\f1 \
+
+\f3 Response:\uc0\u8232 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 title: string | null;
+\f1 \
+
+\f3 info: string | null;
+\f1 \
+
+\f3 image_url: string; (image_url)
+\f1 \
+
+\f3 button_text: string | null;
+\f1 \
+
+\f3 button_url: string | null;\uc0\u8232 \}[] silinen id li obyektden basqa yerde qalan datanin hamisi
+\f1 \
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/about
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{\uc0\u8232 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 description: string;
+\f1 \
+
+\f3 image: string; (image_url)
+\f1 \
+
+\f3 our_mission: string;
+\f1 \
+
+\f3 our_vision: string;\uc0\u8232 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/about
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 \{\uc0\u8232 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 description: string;
+\f1 \
+
+\f3 image: binary; (.png, .jpg, .jpeg, .webp, .avif) formdata binary gonderecem ve mene image_url gelecek
+\f1 \
+
+\f3 our_mission: string;
+\f1 \
+
+\f3 our_vision: string;\uc0\u8232 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{\uc0\u8232 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 description: string;
+\f1 \
+
+\f3 image: string; (image_url)
+\f1 \
+
+\f3 our_mission: string;
+\f1 \
+
+\f3 our_vision: string;\uc0\u8232 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/about
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 \{\uc0\u8232 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 description: string;
+\f1 \
+
+\f3 image: binary; (.png, .jpg, .jpeg, .webp, .avif) formdata binary gonderecem ve mene image_url gelecek
+\f1 \
+
+\f3 our_mission: string;
+\f1 \
+
+\f3 our_vision: string;\uc0\u8232 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{\uc0\u8232 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 description: string;
+\f1 \
+
+\f3 image: string; (image_url)
+\f1 \
+
+\f3 our_mission: string;
+\f1 \
+
+\f3 our_vision: string;\uc0\u8232 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/services
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 \}[](butun siyahi gelecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/services
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 \}[](butun siyahi gelecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/services
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 \} (gonderdiyim data id ye uygun olaraq services icinde olan datani update edecek ve save olacaq ve get sorgusunda umumi siyahida gelecek)
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 \}[](butun siyahi gelecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/services/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 (id ye uygun datani tapib services icinden silecek)
+\f1 \
+
+\f3 Response:\'a0
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 \}[](butun siyahi gelecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/services/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 info: string;
+\f1 \
+
+\f3 \} (services icinden id ye uygun melumati tapib getirecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/stats
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 count: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 \}[](butun siyahi gelecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/stats/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 count: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/stats
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{\uc0\u8232 count: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)\uc0\u8232 count: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 \}[] (butun siyahi gelecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/stats
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 count: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 \} (id ye uygun datani tapib yenileyecek)
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 count: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 \}[](butun siyahi gelecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/stats/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;\uc0\u8232 count: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 \}[](butun siyahi gelecek)
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/projects
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: string; (image_url)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/projects/\{id\}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: string; (image_url)
+\f1 \
+
+\f3 image_gallery: \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 image_url: string;
+\f1 \
+
+\f3 \}[];
+\f1 \
+
+\f3 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/projects\'a0
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: binary;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: string; (image_url)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/projects\'a0
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: binary;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: string; (image_url)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 project yaradilandan sonra o project e uygun image_gallery yarada bilirik
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/projects/images/\{project_id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 image: binary;[]
+\f1 \
+
+\f3 Response:\'a0
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: string; (image_url)
+\f1 \
+
+\f3 image_gallery: \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 image_url: string;
+\f1 \
+
+\f3 \}[];
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/projects/images/\{project_id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 image: binary;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:\'a0
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: string; (image_url)
+\f1 \
+
+\f3 image_gallery: \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 image_url: string;
+\f1 \
+
+\f3 \}[];
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/projects/\{project_id\}/\{image_id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: string; (image_url)
+\f1 \
+
+\f3 image_gallery: \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 image_url: string;
+\f1 \
+
+\f3 \}[];
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/projects/\{project_id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 badge: string;
+\f1 \
+
+\f3 address: string;
+\f1 \
+
+\f3 map_url: string;
+\f1 \
+
+\f3 cover_image: string; (image_url)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/workflow
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/workflow
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/workflow
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/workflow/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 details: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/partners
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 image: string; (image_url)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/partners
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request: (formdata)
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 image: binary;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 image: string; (image_url)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/partners
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 image: binary;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 image: string; (image_url)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/partners/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 image: string; (image_url)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/testimonials
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 customer_full_name: string;
+\f1 \
+
+\f3 customer_type: string;
+\f1 \
+
+\f3 customer_review: string;
+\f1 \
+
+\f3 rating: number; ((3.5 , 5, 4.3 and etc) rating for star count;)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/testimonials
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 customer_full_name: string;
+\f1 \
+
+\f3 customer_type: string;
+\f1 \
+
+\f3 customer_review: string;
+\f1 \
+
+\f3 rating: number; ((3.5 , 5, 4.3 and etc) rating for star count;)
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 customer_full_name: string;
+\f1 \
+
+\f3 customer_type: string;
+\f1 \
+
+\f3 customer_review: string;
+\f1 \
+
+\f3 rating: number; ((3.5 , 5, 4.3 and etc) rating for star count;)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/testimonials
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 customer_full_name: string;
+\f1 \
+
+\f3 customer_type: string;
+\f1 \
+
+\f3 customer_review: string;
+\f1 \
+
+\f3 rating: number; ((3.5 , 5, 4.3 and etc) rating for star count;)
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 customer_full_name: string;
+\f1 \
+
+\f3 customer_type: string;
+\f1 \
+
+\f3 customer_review: string;
+\f1 \
+
+\f3 rating: number; ((3.5 , 5, 4.3 and etc) rating for star count;)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/testimonials/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 customer_full_name: string;
+\f1 \
+
+\f3 customer_type: string;
+\f1 \
+
+\f3 customer_review: string;
+\f1 \
+
+\f3 rating: number; ((3.5 , 5, 4.3 and etc) rating for star count;)
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/contact_info
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 url?: string;
+\f1 \
+
+\f3 contact_type: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/contact_info
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 url: string; (optional)
+\f1 \
+
+\f3 contact_type: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 url?: string;
+\f1 \
+
+\f3 contact_type: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/contact_info
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 url: string; (optional)
+\f1 \
+
+\f3 contact_type: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 url?: string;
+\f1 \
+
+\f3 contact_type: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/contact_info/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 title: string;
+\f1 \
+
+\f3 detail: string;
+\f1 \
+
+\f3 url?: string;
+\f1 \
+
+\f3 contact_type: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/socials
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 url: string;
+\f1 \
+
+\f3 type: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/socials
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 url: string;
+\f1 \
+
+\f3 type: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 url: string;
+\f1 \
+
+\f3 type: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/socials
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 url: string;
+\f1 \
+
+\f3 type: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 url: string;
+\f1 \
+
+\f3 type: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/socials/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 url: string;
+\f1 \
+
+\f3 type: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/map_url
+\f1 \
+
+\f3 Response:\'a0
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 long: string;
+\f1 \
+
+\f3 lat: string;
+\f1 \
+
+\f3 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/map_url
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:\'a0
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 long: string;
+\f1 \
+
+\f3 lat: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:\'a0
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 long: string;
+\f1 \
+
+\f3 lat: string;
+\f1 \
+
+\f3 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/applications
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 full_name: string;
+\f1 \
+
+\f3 email: string;
+\f1 \
+
+\f3 phone: string;
+\f1 \
+
+\f3 message: string;
+\f1 \
+
+\f3 is_viewed: boolean;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/applications
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 full_name: string;
+\f1 \
+
+\f3 email: string;
+\f1 \
+
+\f3 phone: string;
+\f1 \
+
+\f3 message: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \'91M\'fcraci\uc0\u601 tiniz q\u601 bul olundu\'92
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/applications
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 is_viewed: boolean;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 full_name: string;
+\f1 \
+
+\f3 email: string;
+\f1 \
+
+\f3 phone: string;
+\f1 \
+
+\f3 message: string;
+\f1 \
+
+\f3 is_viewed: boolean;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/applications/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 full_name: string;
+\f1 \
+
+\f3 email: string;
+\f1 \
+
+\f3 phone: string;
+\f1 \
+
+\f3 message: string;
+\f1 \
+
+\f3 is_viewed: boolean;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/languages
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 lang: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/languages
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 lang: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 lang: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/languages
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string;
+\f1 \
+
+\f3 lang: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 lang: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 DELETE - /api/v1/languages/\{id\}
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 lang: string;
+\f1 \
+
+\f3 \}[]
+\f1 \
+\pard\pardeftab720\sa320\partightenfactor0
+
+\f4 \cf0 
+\f2\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 Admin panel \'fc\'e7\'fcn:
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 POST - /api/v1/auth/login
+\f1 \
+
+\f3 Request:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 email: string;
+\f1 \
+
+\f3 password: string;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 access_token: string; (JWT token)
+\f1 \
+
+\f3 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/auth/logout
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \'93U\uc0\u287 urla \'e7\u305 x\u305 \u351  etdiniz\'94
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 GET - /api/v1/auth/me
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 full_name: string;
+\f1 \
+
+\f3 phone: string;
+\f1 \
+
+\f3 email: string;
+\f1 \
+
+\f3 role: string; (admin or superAdmin)
+\f1 \
+
+\f3 profile_image: string; (image_url)
+\f1 \
+
+\f3 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 PUT - /api/v1/auth/me
+\f1 \
+
+\f3 headers: Authorization: \'93Bearer \{access_token\}\'94
+\f1 \
+
+\f3 Response: (formdata)
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 full_name: string;
+\f1 \
+
+\f3 phone: string;
+\f1 \
+
+\f3 email: string;
+\f1 \
+
+\f3 profile_image: binary;
+\f1 \
+
+\f3 \}
+\f1 \
+
+\f3 Response:
+\f1 \
+
+\f3 \{
+\f1 \
+
+\f3 id: string; (uuid)
+\f1 \
+
+\f3 full_name: string;
+\f1 \
+
+\f3 phone: string;
+\f1 \
+
+\f3 email: string;
+\f1 \
+
+\f3 role: string; (admin or superAdmin)
+\f1 \
+
+\f3 profile_image: string; (image_url)
+\f1 \
+
+\f3 \}
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 buraya elave olaraq admin panelde bunlari da elave etmeyini isteyirem.
+\f1 \
+
+\f3 GET - /api/v1/auth/users (yalniz superAdmin gore biler)
+\f1 \
+
+\f3 PUT - /api/v1/auth/change_user_role (yalniz superAdmin deyise biler) (role admin ve ya superAdmin)
+\f1 \
+
+\f3 DELETE - /api/v1/auth/users/\{id\} (yalniz superAdmin sile biler)
+\f1 \
+
+\f3 POST - /api/v1/auth/register\'a0 (yalniz superAdmin elave ede biler)\uc0\u8232 POST - /api/v1/auth/send_otp_to_email_for_change_password
+\f1 \
+
+\f3 POST - /api/v1/auth/change_password
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\partightenfactor0
+
+\f3\fs32 \cf0 Elave olaraq translations olacaq. Bunun \'fc\'e7\'fcn s\uc0\u601 n \u601 n ideal variant\u305  fikirl\u601 \u351  sanki Senior developer kimi architect kimi d\'fc\u351 \'fcn. B\'fct\'fcn sayt contenti, b\'fct\'fcn crudlarda olan m\u601 lumatlar v\u601 .s ham\u305 s\u305  translations a uy\u287 un olmal\u305 d\u305 r. multi language. Y\u601 ni ki, /api/v1/languages endpoint d\u601  h\u601 r d\u601 f\u601  yeni dil \u601 lav\u601  olunanda v\u601  ya silin\u601 nd\u601  data da buna g\'f6r\u601  d\u601 yi\u351 diril\u601  bilsin. Tutal\u305 m ki 1 dil var AZ m\u601 n datan\u305  buna g\'f6r\u601  admind\u601 n \u601 lav\u601  edir\u601 m ancaq sonra EN dili \u601 lav\u601  olunanda o zaman admind\u601  d\u601  avtomatik /api/v1/languages get olacaq v\u601  g\u601 l\u601 n dil siyah\u305 s\u305 na uy\u287 un field l\u601 r formala\u351 acaq crud larda. oradan dil\u601  g\'f6r\u601  contenti doldura bilim. header d\u601 n tut footer \u601  kimi b\'fct\'fcn kontent t\u601 rc\'fcm\u601  oluna bil\u601 n v\u601  dinamik olaraq yeni dil \u601 lav\u601  edib t\u601 rc\'fcm\u601 ni d\u601 st\u601 kl\u601 y\u601 n olsun.\'a0
+\f1 \
+\pard\pardeftab720\sa0\partightenfactor0
+
+\f2\fs24 \cf0 \'a0\
+\pard\pardeftab720\sa0\partightenfactor0
+\cf0 \'a0\
+}

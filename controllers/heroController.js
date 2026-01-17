@@ -1,102 +1,109 @@
 const Hero = require('../models/Hero');
 const { getImageUrl } = require('../config/upload');
 
-// @desc    Get hero section
+// Helper to format hero for response
+const formatHero = (hero) => ({
+    id: hero._id,
+    title: hero.title ? Object.fromEntries(hero.title) : {},
+    info: hero.info ? Object.fromEntries(hero.info) : {},
+    image_url: hero.image_url || '',
+    button_text: hero.button_text ? Object.fromEntries(hero.button_text) : {},
+    button_url: hero.button_url || ''
+});
+
+// @desc    Get all hero slides
 // @route   GET /api/v1/hero
 exports.getHero = async (req, res) => {
     try {
-        const hero = await Hero.findOne();
-        if (!hero) {
-            return res.json({
-                title: {},
-                info: {},
-                images: []
-            });
-        }
-        res.json({
-            title: Object.fromEntries(hero.title),
-            info: Object.fromEntries(hero.info),
-            images: hero.images
-        });
+        const heroes = await Hero.find();
+        res.json(heroes.map(formatHero));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-// @desc    Create hero section
+// @desc    Create hero slide
 // @route   POST /api/v1/hero
 exports.createHero = async (req, res) => {
     try {
-        const { title, info } = req.body;
+        const { title, info, button_text, button_url } = req.body;
 
-        // Get image URLs from uploaded files
-        const images = req.files ? req.files.map(file => getImageUrl(file.filename)) : [];
+        // Get image URL from uploaded file
+        const image_url = req.file ? getImageUrl(req.file.filename) : '';
 
-        // Parse title and info if they are strings
-        const parsedTitle = typeof title === 'string' ? JSON.parse(title) : title;
-        const parsedInfo = typeof info === 'string' ? JSON.parse(info) : info;
+        // Parse fields if they are strings
+        const parsedTitle = typeof title === 'string' ? JSON.parse(title) : (title || {});
+        const parsedInfo = typeof info === 'string' ? JSON.parse(info) : (info || {});
+        const parsedButtonText = typeof button_text === 'string' ? JSON.parse(button_text) : (button_text || {});
 
-        // Check if hero already exists
-        let hero = await Hero.findOne();
-
-        if (hero) {
-            // Update existing hero
-            hero.title = new Map(Object.entries(parsedTitle));
-            hero.info = new Map(Object.entries(parsedInfo));
-            if (images.length > 0) {
-                hero.images = images;
-            }
-            await hero.save();
-        } else {
-            // Create new hero
-            hero = await Hero.create({
-                title: new Map(Object.entries(parsedTitle)),
-                info: new Map(Object.entries(parsedInfo)),
-                images
-            });
-        }
-
-        res.status(201).json({
-            title: Object.fromEntries(hero.title),
-            info: Object.fromEntries(hero.info),
-            images: hero.images
+        await Hero.create({
+            title: new Map(Object.entries(parsedTitle)),
+            info: new Map(Object.entries(parsedInfo)),
+            image_url,
+            button_text: new Map(Object.entries(parsedButtonText)),
+            button_url: button_url || ''
         });
+
+        // Return all hero slides
+        const heroes = await Hero.find();
+        res.status(201).json(heroes.map(formatHero));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-// @desc    Update hero section
-// @route   PUT /api/v1/hero
+// @desc    Update hero slide by ID
+// @route   PUT /api/v1/hero/:id
 exports.updateHero = async (req, res) => {
     try {
-        const { title, info } = req.body;
+        const { title, info, button_text, button_url } = req.body;
 
-        // Get image URLs from uploaded files
-        const images = req.files ? req.files.map(file => getImageUrl(file.filename)) : [];
+        // Get image URL from uploaded file
+        const image_url = req.file ? getImageUrl(req.file.filename) : null;
 
-        // Parse title and info if they are strings
+        // Parse fields if they are strings
         const parsedTitle = typeof title === 'string' ? JSON.parse(title) : title;
         const parsedInfo = typeof info === 'string' ? JSON.parse(info) : info;
+        const parsedButtonText = typeof button_text === 'string' ? JSON.parse(button_text) : button_text;
 
-        let hero = await Hero.findOne();
+        const hero = await Hero.findById(req.params.id);
 
         if (!hero) {
-            return res.status(404).json({ message: 'Hero not found' });
+            return res.status(404).json({ message: 'Hero slide not found' });
         }
 
-        hero.title = new Map(Object.entries(parsedTitle));
-        hero.info = new Map(Object.entries(parsedInfo));
-        if (images.length > 0) {
-            hero.images = images;
-        }
+        // Update fields if provided
+        if (parsedTitle) hero.title = new Map(Object.entries(parsedTitle));
+        if (parsedInfo) hero.info = new Map(Object.entries(parsedInfo));
+        if (image_url) hero.image_url = image_url;
+        if (parsedButtonText) hero.button_text = new Map(Object.entries(parsedButtonText));
+        if (button_url !== undefined) hero.button_url = button_url;
+
         await hero.save();
 
-        res.json({
-            title: Object.fromEntries(hero.title),
-            info: Object.fromEntries(hero.info),
-            images: hero.images
-        });
+        // Return all hero slides
+        const heroes = await Hero.find();
+        res.json(heroes.map(formatHero));
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Delete hero slide by ID
+// @route   DELETE /api/v1/hero/:id
+exports.deleteHero = async (req, res) => {
+    try {
+        const hero = await Hero.findById(req.params.id);
+
+        if (!hero) {
+            return res.status(404).json({ message: 'Hero slide not found' });
+        }
+
+        await Hero.findByIdAndDelete(req.params.id);
+
+        // Return remaining hero slides
+        const heroes = await Hero.find();
+        res.json(heroes.map(formatHero));
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

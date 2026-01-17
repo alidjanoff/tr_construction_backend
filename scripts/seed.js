@@ -55,7 +55,7 @@ const seedDatabase = async () => {
         });
         console.log('✓ SuperAdmin user created (email: admin@trconstruction.az, password: Admin@123)');
 
-        // Seed Hero
+        // Seed Hero Slides (array-based structure)
         await Hero.create({
             title: new Map([
                 ['az', azLocale.hero.title],
@@ -65,9 +65,31 @@ const seedDatabase = async () => {
                 ['az', azLocale.hero.subtitle],
                 ['en', enLocale.hero.subtitle]
             ]),
-            images: []
+            image_url: '',
+            button_text: new Map([
+                ['az', 'Ətraflı'],
+                ['en', 'Learn More']
+            ]),
+            button_url: '/about'
         });
-        console.log('✓ Hero section seeded');
+        // Add a second hero slide as example
+        await Hero.create({
+            title: new Map([
+                ['az', 'Tikinti Sahəsində Mükəmməllik'],
+                ['en', 'Excellence in Construction']
+            ]),
+            info: new Map([
+                ['az', 'Professional tikinti xidmətləri'],
+                ['en', 'Professional construction services']
+            ]),
+            image_url: '',
+            button_text: new Map([
+                ['az', 'Layihələr'],
+                ['en', 'Projects']
+            ]),
+            button_url: '/projects'
+        });
+        console.log('✓ Hero slides seeded');
 
         // Seed About
         await About.create({
