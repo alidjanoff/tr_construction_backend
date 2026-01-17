@@ -15,8 +15,6 @@ jobs:
           script: |
             cd /var/www/tr_construction_backend
             git pull origin main
-            docker stop tr_construction_backend || true
-            docker rm tr_construction_backend || true
-            docker build -t tr-backend-image .
-            docker run -d --name tr_construction_backend -p 0.0.0.0:8000:8000 tr-backend-image
+            cd /var/www
+            docker-compose up -d --build backend
             docker image prune -f
