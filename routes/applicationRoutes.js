@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth');
+const languageFilter = require('../middlewares/languageFilter');
 const {
     getApplications,
     createApplication,
@@ -9,11 +10,11 @@ const {
 } = require('../controllers/applicationController');
 
 // Public route (contact form submission)
-router.post('/', createApplication);
+router.post('/', languageFilter, createApplication);
 
-// Protected routes
-router.get('/', auth, getApplications);
-router.put('/', auth, updateApplication);
-router.delete('/:id', auth, deleteApplication);
+// Protected routes (languageFilter to show response in language context)
+router.get('/', auth, languageFilter, getApplications);
+router.put('/', auth, languageFilter, updateApplication);
+router.delete('/:id', auth, languageFilter, deleteApplication);
 
 module.exports = router;

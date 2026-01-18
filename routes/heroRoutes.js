@@ -12,8 +12,8 @@ const {
 // Public routes
 router.get('/', languageFilter, getHero);
 
-// Protected routes
-router.post('/', auth, uploadMultiple, createHero);
-router.put('/', auth, uploadMultiple, updateHero);
+// Protected routes (languageFilter to show response in language context)
+router.post('/', auth, uploadMultiple, languageFilter, createHero);
+router.put('/', auth, uploadMultiple, languageFilter, updateHero);
 
 module.exports = router;

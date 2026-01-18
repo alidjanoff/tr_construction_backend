@@ -12,9 +12,9 @@ const {
 // Public routes
 router.get('/', languageFilter, getContactInfos);
 
-// Protected routes
-router.post('/', auth, createContactInfo);
-router.put('/', auth, updateContactInfo);
-router.delete('/:id', auth, deleteContactInfo);
+// Protected routes (languageFilter to show response in language context)
+router.post('/', auth, languageFilter, createContactInfo);
+router.put('/', auth, languageFilter, updateContactInfo);
+router.delete('/:id', auth, languageFilter, deleteContactInfo);
 
 module.exports = router;

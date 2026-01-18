@@ -5,8 +5,7 @@ const formatTestimonial = (testimonial) => ({
     id: testimonial._id,
     customer_full_name: testimonial.customer_full_name,
     customer_type: Object.fromEntries(testimonial.customer_type),
-    customer_review: Object.fromEntries(testimonial.customer_review),
-    rating: testimonial.rating
+    customer_review: Object.fromEntries(testimonial.customer_review)
 });
 
 // @desc    Get all testimonials
@@ -24,13 +23,12 @@ exports.getTestimonials = async (req, res) => {
 // @route   POST /api/v1/testimonials
 exports.createTestimonial = async (req, res) => {
     try {
-        const { customer_full_name, customer_type, customer_review, rating } = req.body;
+        const { customer_full_name, customer_type, customer_review } = req.body;
 
         await Testimonial.create({
             customer_full_name,
             customer_type: new Map(Object.entries(customer_type)),
-            customer_review: new Map(Object.entries(customer_review)),
-            rating
+            customer_review: new Map(Object.entries(customer_review))
         });
 
         const testimonials = await Testimonial.find();
@@ -44,7 +42,7 @@ exports.createTestimonial = async (req, res) => {
 // @route   PUT /api/v1/testimonials
 exports.updateTestimonial = async (req, res) => {
     try {
-        const { id, customer_full_name, customer_type, customer_review, rating } = req.body;
+        const { id, customer_full_name, customer_type, customer_review } = req.body;
 
         const testimonial = await Testimonial.findById(id);
         if (!testimonial) {
@@ -54,7 +52,6 @@ exports.updateTestimonial = async (req, res) => {
         testimonial.customer_full_name = customer_full_name;
         testimonial.customer_type = new Map(Object.entries(customer_type));
         testimonial.customer_review = new Map(Object.entries(customer_review));
-        testimonial.rating = rating;
         await testimonial.save();
 
         const testimonials = await Testimonial.find();

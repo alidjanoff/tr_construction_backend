@@ -12,9 +12,9 @@ const {
 // Public routes
 router.get('/', languageFilter, getWorkflows);
 
-// Protected routes
-router.post('/', auth, createWorkflow);
-router.put('/', auth, updateWorkflow);
-router.delete('/:id', auth, deleteWorkflow);
+// Protected routes (languageFilter to show response in language context)
+router.post('/', auth, languageFilter, createWorkflow);
+router.put('/', auth, languageFilter, updateWorkflow);
+router.delete('/:id', auth, languageFilter, deleteWorkflow);
 
 module.exports = router;

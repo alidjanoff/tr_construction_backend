@@ -13,9 +13,9 @@ const {
 // Public routes
 router.get('/', languageFilter, getPartners);
 
-// Protected routes
-router.post('/', auth, uploadSingle, createPartner);
-router.put('/', auth, uploadSingle, updatePartner);
-router.delete('/:id', auth, deletePartner);
+// Protected routes (languageFilter to show response in language context)
+router.post('/', auth, uploadSingle, languageFilter, createPartner);
+router.put('/', auth, uploadSingle, languageFilter, updatePartner);
+router.delete('/:id', auth, languageFilter, deletePartner);
 
 module.exports = router;

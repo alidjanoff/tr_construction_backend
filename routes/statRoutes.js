@@ -12,11 +12,11 @@ const {
 
 // Public routes
 router.get('/', languageFilter, getStats);
-router.get('/:id', auth, getStat);
+router.get('/:id', languageFilter, getStat);
 
-// Protected routes
-router.post('/', auth, createStat);
-router.put('/', auth, updateStat);
-router.delete('/:id', auth, deleteStat);
+// Protected routes (languageFilter to show response in language context)
+router.post('/', auth, languageFilter, createStat);
+router.put('/', auth, languageFilter, updateStat);
+router.delete('/:id', auth, languageFilter, deleteStat);
 
 module.exports = router;
