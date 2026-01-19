@@ -26,17 +26,20 @@ const app = express();
 // Connect to MongoDB
 connectDB();
 
+const allowedOrigins = [
+  'https://trmmc.az',
+  'https://www.trmmc.az',
+  'https://admin.trmmc.az'
+];
+
 // Middleware
 app.use(cors({
-  origin: true, // Reflects the request origin, necessary for credentials: true
+  origin: allowedOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'Access-Control-Allow-Headers'],
   optionsSuccessStatus: 200
 }));
-
-// Manually handle preflight for all routes if needed (extra safety)
-app.options('*', cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
