@@ -14,7 +14,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/tr_construction_backend
-            git pull origin main
-            cd /var/www
-            docker-compose up -d --build backend
-            docker image prune -f
+            git pull
+            npm i 
+            pm2 restart 2
