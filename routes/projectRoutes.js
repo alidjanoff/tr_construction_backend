@@ -58,14 +58,14 @@ const uploadSingleImage = multer({
 router.get('/', languageFilter, getProjects);
 router.get('/:idOrSlug', languageFilter, getProject);
 
-// Protected routes
-router.post('/', auth, uploadCover, createProject);
-router.put('/', auth, uploadCover, updateProject);
-router.delete('/:id', auth, deleteProject);
+// Protected routes (languageFilter to show response in language context)
+router.post('/', auth, uploadCover, languageFilter, createProject);
+router.put('/', auth, uploadCover, languageFilter, updateProject);
+router.delete('/:id', auth, languageFilter, deleteProject);
 
 // Project image gallery routes
-router.post('/images/:project_id', auth, uploadImages, addProjectImages);
-router.put('/images/:project_id', auth, uploadSingleImage, updateProjectImage);
-router.delete('/:project_id/:image_id', auth, deleteProjectImage);
+router.post('/images/:project_id', auth, uploadImages, languageFilter, addProjectImages);
+router.put('/images/:project_id', auth, uploadSingleImage, languageFilter, updateProjectImage);
+router.delete('/:project_id/:image_id', auth, languageFilter, deleteProjectImage);
 
 module.exports = router;

@@ -2,20 +2,18 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../middlewares/auth');
 const languageFilter = require('../middlewares/languageFilter');
-const { uploadSingle } = require('../config/upload');
+const { uploadMultiple } = require('../config/upload');
 const {
     getHero,
     createHero,
-    updateHero,
-    deleteHero
+    updateHero
 } = require('../controllers/heroController');
 
 // Public routes
 router.get('/', languageFilter, getHero);
 
-// Protected routes
-router.post('/', auth, uploadSingle, createHero);
-router.put('/:id', auth, uploadSingle, updateHero);
-router.delete('/:id', auth, deleteHero);
+// Protected routes (languageFilter to show response in language context)
+router.post('/', auth, uploadMultiple, languageFilter, createHero);
+router.put('/', auth, uploadMultiple, languageFilter, updateHero);
 
 module.exports = router;
