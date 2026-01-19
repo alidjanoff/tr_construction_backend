@@ -64,24 +64,24 @@ app.use('/api/v1/applications', applicationRoutes);
 
 // Health check endpoint
 app.get('/api/v1/health', (req, res) => {
-  res.json({ status: 'OK', message: 'TR Construction API is running' });
+    res.json({ status: 'OK', message: 'TR Construction API is running' });
 });
 
 // 404 handler
 app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
+    res.status(404).json({ message: 'Route not found' });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Internal server error', error: err.message });
+    console.error(err.stack);
+    res.status(500).json({ message: 'Internal server error', error: err.message });
 });
 
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
 
 module.exports = app;
