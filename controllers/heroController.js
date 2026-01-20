@@ -28,8 +28,8 @@ exports.createHero = async (req, res) => {
     try {
         const { title, info, button_text, button_url } = req.body;
 
-        // Get image URL from uploaded file
-        const image_url = req.file ? getImageUrl(req.file.filename) : '';
+        // Get image URL from uploaded file (using files array from uploadMultiple)
+        const image_url = req.files && req.files[0] ? getImageUrl(req.files[0].filename) : '';
 
         // Parse fields if they are strings
         const parsedTitle = typeof title === 'string' ? JSON.parse(title) : (title || {});
@@ -58,8 +58,8 @@ exports.updateHero = async (req, res) => {
     try {
         const { title, info, button_text, button_url } = req.body;
 
-        // Get image URL from uploaded file
-        const image_url = req.file ? getImageUrl(req.file.filename) : null;
+        // Get image URL from uploaded file (using files array from uploadMultiple)
+        const image_url = req.files && req.files[0] ? getImageUrl(req.files[0].filename) : null;
 
         // Parse fields if they are strings
         const parsedTitle = typeof title === 'string' ? JSON.parse(title) : title;

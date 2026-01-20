@@ -163,16 +163,28 @@ const filterByLanguage = (data, lang) => {
 
 /**
  * Express middleware that intercepts res.json() and filters response by language
+ * 
+ * NOTE: If Authorization header is present (admin dashboard), we skip language filtering
+ * so the dashboard always receives all translations for editing purposes.
  */
 const languageFilter = (req, res, next) => {
     const originalJson = res.json.bind(res);
 
     res.json = (data) => {
         const lang = req.header('Accept-Language');
+        const hasAuth = req.header('Authorization');
+
+        // Skip filtering for authenticated requests (admin dashboard)
+        // They need all translations for editing
+        if (hasAuth) {
+            return originalJson(data);
+        }
 
         // Only filter if Accept-Language header is present and data exists
         if (lang && data) {
-            const filteredData = filterByLanguage(data, lang.toLowerCase());
+            // Parse Accept-Language to get primary language (e.g., "az" from "az,en;q=0.9")
+            const primaryLang = lang.split(',')[0].split('-')[0].toLowerCase();
+            const filteredData = filterByLanguage(data, primaryLang);
             return originalJson(filteredData);
         }
 

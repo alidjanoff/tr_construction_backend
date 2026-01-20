@@ -27,9 +27,18 @@ const app = express();
 connectDB();
 
 const allowedOrigins = [
+  // Production
   'https://trmmc.az',
   'https://www.trmmc.az',
-  'https://admin.trmmc.az'
+  'https://admin.trmmc.az',
+  // Staging
+  'https://stg-admin.trmmc.az',
+  'https://stg-api-admin.trmmc.az',
+  // Development
+  'http://localhost:4175',
+  'http://localhost:5173',
+  'http://localhost:3000',
+  'http://localhost:8000'
 ];
 
 // Middleware
@@ -64,24 +73,24 @@ app.use('/api/v1/applications', applicationRoutes);
 
 // Health check endpoint
 app.get('/api/v1/health', (req, res) => {
-    res.json({ status: 'OK', message: 'TR Construction API is running' });
+  res.json({ status: 'OK', message: 'TR Construction API is running' });
 });
 
 // 404 handler
 app.use((req, res) => {
-    res.status(404).json({ message: 'Route not foundssss' });
+  res.status(404).json({ message: 'Route not foundssss' });
 });
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ message: 'Internal server error', error: err.message });
+  console.error(err.stack);
+  res.status(500).json({ message: 'Internal server error', error: err.message });
 });
 
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
 
 module.exports = app;
