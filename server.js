@@ -78,7 +78,7 @@ app.get('/api/v1/health', (req, res) => {
 
 // 404 handler
 app.use((req, res) => {
-  res.status(404).json({ message: 'Route not foundssss' });
+  res.status(404).json({ message: 'Route not found' });
 });
 
 // Error handling middleware
