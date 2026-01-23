@@ -13,12 +13,14 @@ const {
     changeUserRole,
     deleteUser,
     sendOtpForPasswordChange,
+    verifyOtp,
     changePassword
 } = require('../controllers/authController');
 
 // Public routes
 router.post('/login', login);
 router.post('/send_otp_to_email_for_change_password', sendOtpForPasswordChange);
+router.post('/verify_otp', verifyOtp);
 router.post('/change_password', changePassword);
 
 // Protected routes

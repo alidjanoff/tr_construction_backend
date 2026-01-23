@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const generateToken = require('../utils/generateToken');
 const { getImageUrl } = require('../config/upload');
+const sendEmail = require('../utils/sendEmail');
+const { getOTPTemplate } = require('../utils/emailTemplates');
 
 // @desc    Login user
 // @route   POST /api/v1/auth/login
@@ -197,7 +199,7 @@ exports.sendOtpForPasswordChange = async (req, res) => {
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'İstifadəçi tapılmadı' });
         }
 
         // Generate 6-digit OTP
@@ -206,11 +208,43 @@ exports.sendOtpForPasswordChange = async (req, res) => {
 
         await User.findByIdAndUpdate(user._id, { otp, otpExpires });
 
-        // In a real app, you would send this OTP via email
-        // For now, we'll just return a success message
-        console.log(`OTP for ${email}: ${otp}`);
+        // Send Email
+        try {
+            await sendEmail({
+                email: user.email,
+                subject: 'Şifrə Bərpası - TR Construction',
+                html: getOTPTemplate(otp)
+            });
+            res.json({ message: 'Təhlükəsizlik kodu e-poçt ünvanınıza göndərildi' });
+        } catch (mailError) {
+            console.error('Mail error:', mailError);
+            res.status(500).json({ message: 'E-poçt göndərilərkən xəta baş verdi. Zəhmət olmasa SMTP ayarlarını yoxlayın.' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
-        res.json({ message: 'OTP sent to your email' });
+// @desc    Verify OTP
+// @route   POST /api/v1/auth/verify_otp
+exports.verifyOtp = async (req, res) => {
+    try {
+        const { email, otp } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: 'İstifadəçi tapılmadı' });
+        }
+
+        if (!user.otp || user.otp !== otp) {
+            return res.status(400).json({ message: 'Yanlış təhlükəsizlik kodu' });
+        }
+
+        if (user.otpExpires < new Date()) {
+            return res.status(400).json({ message: 'Təhlükəsizlik kodunun vaxtı bitib' });
+        }
+
+        res.json({ message: 'OTP uğurla təsdiqləndi', verified: true });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -224,15 +258,15 @@ exports.changePassword = async (req, res) => {
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(404).json({ message: 'İstifadəçi tapılmadı' });
         }
 
         if (!user.otp || user.otp !== otp) {
-            return res.status(400).json({ message: 'Invalid OTP' });
+            return res.status(400).json({ message: 'Yanlış təhlükəsizlik kodu' });
         }
 
         if (user.otpExpires < new Date()) {
-            return res.status(400).json({ message: 'OTP has expired' });
+            return res.status(400).json({ message: 'Təhlükəsizlik kodunun vaxtı bitib' });
         }
 
         user.password = new_password;
@@ -240,7 +274,7 @@ exports.changePassword = async (req, res) => {
         user.otpExpires = null;
         await user.save();
 
-        res.json({ message: 'Password changed successfully' });
+        res.json({ message: 'Şifrəniz uğurla dəyişdirildi' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
