@@ -34,7 +34,7 @@ const projectSchema = new mongoose.Schema({
     details: {
         type: Map,
         of: String,
-        default: new Map()
+        required: true
     },
     badge: {
         type: Map,
@@ -44,7 +44,7 @@ const projectSchema = new mongoose.Schema({
     address: {
         type: Map,
         of: String,
-        default: new Map()
+        required: true
     },
     map_url: {
         type: String,
@@ -52,7 +52,7 @@ const projectSchema = new mongoose.Schema({
     },
     cover_image: {
         type: String,
-        default: ''
+        required: true
     },
     image_gallery: [{
         image_url: {
