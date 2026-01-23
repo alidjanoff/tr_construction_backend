@@ -10,6 +10,10 @@ const serviceSchema = new mongoose.Schema({
         type: Map,
         of: String,
         required: true
+    },
+    image: {
+        type: String,
+        required: false
     }
 }, {
     timestamps: true
